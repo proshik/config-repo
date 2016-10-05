@@ -8,3 +8,15 @@ logging:
 account-service:
   ribbon:
     listOfServers: localhost:9020
+
+eureka:
+  client:
+    enabled: false
+
+ribbon:
+  eureka:
+    enabled: false
+
+feign:
+  hystrix:
+    enabled: false

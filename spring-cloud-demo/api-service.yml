@@ -3,7 +3,7 @@ server:
 
 logging:
   level:
-    org.springframework: DEBUG
+    org.springframework: INFO
 
 #maybe will need change this value on default=30 in production
 eureka:

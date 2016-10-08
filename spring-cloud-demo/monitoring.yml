@@ -1,0 +1,6 @@
+turbine:
+  stream:
+    port: 8989
+
+server:
+  port: 8787

@@ -5,6 +5,8 @@ logging:
   level:
     org.springframework: DEBUG
 
+#maybe will need change this value on default=30 in production
 eureka:
-  client:
-    enabled: false
+  instance:
+    lease-renewal-interval-in-seconds: 10
+    prefer-ip-address: true

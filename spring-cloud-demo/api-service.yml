@@ -5,18 +5,8 @@ logging:
   level:
     org.springframework: DEBUG
 
-account-service:
-  ribbon:
-    listOfServers: localhost:9020
-
+#maybe will need change this value on default=30 in production
 eureka:
-  client:
-    enabled: false
-
-ribbon:
-  eureka:
-    enabled: false
-
-feign:
-  hystrix:
-    enabled: false
+  instance:
+    lease-renewal-interval-in-seconds: 10
+    prefer-ip-address: true

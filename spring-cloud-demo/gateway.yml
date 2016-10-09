@@ -1,0 +1,14 @@
+server:
+  port: 4000
+
+zuul:
+  routes:
+    api-service:
+      path: **/api/**
+      clientId: api-service
+      stripPrefix: false
+
+    account-service:
+      path: **/account/**
+      clientId: account-service
+      stripPrefix: false

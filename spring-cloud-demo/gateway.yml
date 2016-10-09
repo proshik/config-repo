@@ -4,11 +4,11 @@ server:
 zuul:
   routes:
     api-service:
-      path: **/api/**
+      path: /**/api/**
       clientId: api-service
       stripPrefix: false
 
     account-service:
-      path: **/account/**
+      path: /**/account/**
       clientId: account-service
       stripPrefix: false

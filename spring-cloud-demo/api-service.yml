@@ -10,3 +10,20 @@ eureka:
   instance:
     lease-renewal-interval-in-seconds: 10
     prefer-ip-address: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://registry:8771/eureka/
+
+spring:
+  rabbitmq:
+    host: rabbitmq

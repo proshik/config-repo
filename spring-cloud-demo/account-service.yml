@@ -7,6 +7,9 @@ logging:
 
 #maybe will need change this value on default=30 in production
 eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://registry:8771/eureka/
   instance:
     lease-renewal-interval-in-seconds: 10
     prefer-ip-address: true
@@ -18,11 +21,6 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 10000
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://registry:8771/eureka/
 
 spring:
   rabbitmq:

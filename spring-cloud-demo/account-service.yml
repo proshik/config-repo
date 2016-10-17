@@ -24,4 +24,4 @@ hystrix:
 
 spring:
   rabbitmq:
-    host: http://rabbitmq
+    host: rabbitmq

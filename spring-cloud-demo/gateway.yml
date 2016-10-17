@@ -24,4 +24,4 @@ hystrix:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://registry:8771/eureka/
+      defaultZone: http://registry:8761/eureka/

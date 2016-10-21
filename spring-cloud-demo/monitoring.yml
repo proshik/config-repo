@@ -4,11 +4,11 @@ server:
 turbine:
   stream:
     port: 8989
-    
+
 spring:
   rabbitmq:
     host: rabbitmq
 
 logging:
   level:
-    org.springframework: DEBUG
+    org.springframework: INFO

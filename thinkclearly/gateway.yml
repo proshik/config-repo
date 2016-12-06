@@ -7,11 +7,19 @@ zuul:
       path: /**/topic/**
       clientId: topic-service
       stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie
 
     account-service:
       path: /**/account/**
       clientId: account-service
       stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie
+
+    auth-service:
+      path: /uaa/**
+      clientId: auth-service
+      stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie
 
 hystrix:
   command:

@@ -1,5 +1,6 @@
 server:
-    port: 9010
+    port: 5000
+    context-path: /uaa
 
 spring:
   jpa:
@@ -9,7 +10,7 @@ spring:
   database:
     driverClassName: org.postgresql.Driver
   datasource:
-    url: jdbc:postgresql://postgresql:5432/think_clearly_topic
+    url: jdbc:postgresql://postgresql:5432/think_clearly_auth
     username: ${POSTGRES_USERNAME}
     password: ${POSTGRES_PASSWORD}
     initial-size: 5
@@ -44,16 +45,10 @@ hystrix:
           thread:
             timeoutInMilliseconds: 10000
 
-security:
-  oauth2:
-    resource:
-      user-info-uri: http://auth-service:5000/uaa/users/current
-    client:
-      clientId: topic-service
-      clientSecret: ${TOPIC_SERVICE_PASSWORD}
-      accessTokenUri: http://auth-service:5000/uaa/oauth/token
-      grant-type: client_credentials
-      scope: server
+auth:
+  service:
+    sign:
+      key: secretKey_need_will_be_change
 
 logging:
   level:

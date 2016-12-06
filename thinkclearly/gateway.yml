@@ -3,9 +3,9 @@ server:
 
 zuul:
   routes:
-    api-service:
-      path: /**/api/**
-      clientId: api-service
+    topic-service:
+      path: /**/topic/**
+      clientId: topic-service
       stripPrefix: false
 
     account-service:

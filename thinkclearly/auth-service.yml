@@ -23,7 +23,9 @@ spring:
     min-idle: 2
     validation-query: select 1
   rabbitmq:
-    host: ${RABBITMQ_URL}
+    password: ${RABBITMQ_PASSWORD}
+    username: ${RABBITMQ_USERNAME}
+    host: ${RABBITMQ_HOST}
   sleuth:
     sampler:
       percentage: 0.9

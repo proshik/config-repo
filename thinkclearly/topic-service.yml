@@ -9,7 +9,7 @@ spring:
   database:
     driverClassName: org.postgresql.Driver
   datasource:
-    url: jdbc:postgresql://postgresql:5432/think_clearly_topic
+    url: jdbc:postgresql://${POSTGRES_URL}/${POSTGRES_TOPIC_DB_NAME}
     username: ${POSTGRES_USERNAME}
     password: ${POSTGRES_PASSWORD}
     initial-size: 5
@@ -21,7 +21,7 @@ spring:
     min-idle: 2
     validation-query: select 1
   rabbitmq:
-    host: rabbitmq
+    host: ${RABBITMQ_URL}
   sleuth:
     sampler:
       percentage: 0.9
@@ -32,7 +32,7 @@ liquibase:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://registry:8761/eureka/
+      defaultZone: ${EUREKA_URL}/eureka
   instance:
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
 
@@ -47,11 +47,11 @@ hystrix:
 security:
   oauth2:
     resource:
-      user-info-uri: http://auth-service:5000/uaa/users/current
+      user-info-uri: ${AUTH_SEVICE_URL}/uaa/users/current
     client:
       clientId: topic-service
       clientSecret: ${TOPIC_SERVICE_PASSWORD}
-      accessTokenUri: http://auth-service:5000/uaa/oauth/token
+      accessTokenUri: ${AUTH_SEVICE_URL}/uaa/oauth/token
       grant-type: client_credentials
       scope: server
 

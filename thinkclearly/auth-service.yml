@@ -10,7 +10,8 @@ spring:
   database:
     driverClassName: org.postgresql.Driver
   datasource:
-    url: jdbc:postgresql://postgresql:5432/think_clearly_auth
+    url: jdbc:postgresql://${POSTGRES_URL}/${POSTGRES_AUTH_DB_NAME}
+#    url: jdbc:postgresql://postgresql:5432/think_clearly_auth
     username: ${POSTGRES_USERNAME}
     password: ${POSTGRES_PASSWORD}
     initial-size: 5
@@ -22,7 +23,7 @@ spring:
     min-idle: 2
     validation-query: select 1
   rabbitmq:
-    host: rabbitmq
+    host: ${RABBITMQ_URL}
   sleuth:
     sampler:
       percentage: 0.9
@@ -33,7 +34,8 @@ liquibase:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://registry:8761/eureka/
+      defaultZone: ${EUREKA_URL}/eureka
+#      defaultZone: http://registry:8761/eureka/
   instance:
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
 
@@ -48,7 +50,7 @@ hystrix:
 auth:
   service:
     sign:
-      key: secretKey_need_will_be_change
+      key: ${SECRET_KEY}
 
 logging:
   level:

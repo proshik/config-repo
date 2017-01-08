@@ -7,7 +7,7 @@ turbine:
 
 spring:
   rabbitmq:
-    host: rabbitmq
+    host: ${RABBITMQ_URL}
 
 logging:
   level:

@@ -34,7 +34,7 @@ spring:
     validation-query: select 1
 
 server:
-    port: 6010
+    port: 5010
 
 liquibase:
   change-log: classpath:db-changelog.xml

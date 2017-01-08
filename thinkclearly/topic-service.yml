@@ -1,19 +1,7 @@
+server:
+    port: 9010
+
 spring:
-  profiles: dev
-  application:
-    name: topic-service
-    index: ${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
-  cloud:
-    config:
-      enabled: false
-      discovery:
-        enabled: false
-    bus:
-      enabled: false
-  sleuth:
-      enabled: false
-      integration:
-        enabled: false
   jpa:
     database: POSTGRESQL
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -21,9 +9,9 @@ spring:
   database:
     driverClassName: org.postgresql.Driver
   datasource:
-    url: jdbc:postgresql://localhost:5432/think_clearly_topic
-    username: postgres
-    password: password
+    url: jdbc:postgresql://${POSTGRES_URL}/${POSTGRES_TOPIC_DB_NAME}
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
     initial-size: 5
     max-active: 100
     max-idle: 5
@@ -32,56 +20,43 @@ spring:
     test-on-return: true
     min-idle: 2
     validation-query: select 1
-
-server:
-    port: 6010
+  rabbitmq:
+    password: ${RABBITMQ_PASSWORD}
+    username: ${RABBITMQ_USERNAME}
+    host: ${RABBITMQ_HOST}
+  sleuth:
+    sampler:
+      percentage: 0.9
 
 liquibase:
   change-log: classpath:db-changelog.xml
 
 eureka:
   client:
-    enabled: false
-ribbon:
-  eureka:
-    enabled: false
-feign:
-  hystrix:
-    enabled: false
-
-account-service:
-  ribbon:
-    listOfServers: localhost:9020
-
-auth-service:
-  ribbon:
-    listOfServers: localhost:5000
+    serviceUrl:
+      defaultZone: ${EUREKA_URL}/eureka
+  instance:
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
 
 hystrix:
   command:
     default:
       execution:
-        timeout:
-          enabled: false
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
 
 security:
   oauth2:
     resource:
-      user-info-uri: http://localhost:5000/uaa/users/current
+      user-info-uri: ${AUTH_SEVICE_URL}/uaa/users/current
     client:
       clientId: topic-service
-      clientSecret: password
-      accessTokenUri: http://localhost:5000/uaa/oauth/token
+      clientSecret: ${TOPIC_SERVICE_PASSWORD}
+      accessTokenUri: ${AUTH_SEVICE_URL}/uaa/oauth/token
       grant-type: client_credentials
       scope: server
-  basic:
-    enabled: false
-#for disable oauth endpoints security
-  ignored: /**
 
-#log-config
 logging:
   level:
     org.springframework: INFO
-    org.hibernate.type: TRACE
-    org.hibernate: DEBUG

@@ -1,5 +1,5 @@
 spring:
-  profiles: dev
+  profiles: default
   application:
     name: topic-service
     index: ${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}

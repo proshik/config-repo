@@ -34,7 +34,7 @@ liquibase:
 eureka:
   client:
     serviceUrl:
-      defaultZone: ${EUREKA_URL}/eureka
+      defaultZone: ${REGISTRY_SERVICE_HOST}/eureka
   instance:
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
 

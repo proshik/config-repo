@@ -1,0 +1,39 @@
+server:
+  port: 4000
+
+spring:
+  application:
+    name: thinkclearly-gateway-service
+
+zuul:
+  routes:
+    topic-service:
+      path: /**/topic/**
+      clientId: thinkclearly_topic-service
+      stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie
+
+    account-service:
+      path: /**/account/**
+      clientId: thinkclearly_account-service
+      stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${REGISTRY_SERVICE_HOST}/eureka
+  instance:
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+
+logging:
+  level:
+    org.springframework: INFO
